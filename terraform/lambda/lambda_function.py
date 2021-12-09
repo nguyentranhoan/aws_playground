@@ -127,27 +127,16 @@ class S3BucketFile:
                                          Key=file_name)
 
 
-# if __name__ == '__main__':
-#     bucket_source, _ = S3Bucket.create_bucket_using_session('hoan-test-source')
-#     bucket_destination, _ = S3Bucket.create_bucket_using_session('hoan-test-destination')
-#     # Upload file to source bucket(s)
-#     S3BucketFile.upload_a_file_using_bucket(bucket_source, 'static/hoan.txt')
-#     S3BucketFile.upload_a_file_using_bucket(bucket_source, 'static/athena.txt.txt')
-#     # copy file file from source bucket(s) to des bucket(s)
-#     S3BucketFile.copy_a_file_using_bucket(bucket_source, bucket_destination, 'static/hoan.txt')
-#     S3BucketFile.copy_a_file_using_bucket(bucket_source, bucket_destination, 'static/athena.txt.txt')
-
-
 def lambda_handler(event, context):
     try:
         # Create buckets
-        # hoan-test-terraform, _ = S3Bucket.create_bucket_using_session('hoan-test-source')
-        # hoan-test-destination-terraform, _ = S3Bucket.create_bucket_using_session('hoan-test-destination')
+        hoan_test_terraform, _ = S3Bucket.create_bucket_using_session('hoan-test-source-python')
+        hoan_test_destination_terraform, _ = S3Bucket.create_bucket_using_session('hoan-test-destination-python')
         # Upload file to source bucket(s)
-        # S3BucketFile.upload_a_file_using_bucket('hoan-test-terraform', '../../static/hoan.txt')
-        # S3BucketFile.upload_a_file_using_bucket('hoan-test-terraform', 'static/athena.txt')
+        S3BucketFile.upload_a_file_using_bucket('hoan-test-terraform', '../../static/hoan.txt')
+        S3BucketFile.upload_a_file_using_bucket('hoan-test-terraform', 'static/athena.txt')
         # copy file file from source bucket(s) to des bucket(s)
-        # S3BucketFile.copy_a_file_using_bucket('hoan-test-terraform', 'hoan-test-destination-terraform', 'hoan.txt')
+        S3BucketFile.copy_a_file_using_bucket('hoan-test-terraform', 'hoan-test-destination-terraform', 'hoan.txt')
         S3BucketFile.copy_a_file_using_bucket('hoan-test-terraform', 'hoan-test-destination-terraform', 'athena.txt')
 
         return {
@@ -160,8 +149,3 @@ def lambda_handler(event, context):
             'statusCode': 400,
             'body': json.dumps('Bad request!')
         }
-
-
-def invoke_lambda_function():
-    lambda_client = boto3.client('lambda')
-    lambda_client.invoke(FunctionName='lambda_handler')

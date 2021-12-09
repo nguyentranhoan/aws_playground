@@ -1,11 +1,11 @@
 resource "aws_glue_catalog_database" "euro2020" {
-  name = "euro2020"
+  name = var.database_name
 }
 
 
 resource "aws_glue_catalog_table" "aws_glue_catalog_table" {
-  name          = "match_information"
-  database_name = "euro2020"
+  name          = var.table_name
+  database_name = var.database_name
 
   table_type = "EXTERNAL_TABLE"
 

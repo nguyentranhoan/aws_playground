@@ -15,8 +15,9 @@ resource "aws_iam_policy" "s3_iam_policy" {
 })
 }
 
-resource "aws_iam_role" "iam_for_lambda" {
-  name = "lambda_role"
+resource "aws_iam_role" "hoan_iam_for_lambda" {
+  name = "hoan-lambda-role"
+  managed_policy_arns = [aws_iam_policy.s3_iam_policy.arn]
   assume_role_policy = jsonencode({
     Statement: [
       {
@@ -27,24 +28,6 @@ resource "aws_iam_role" "iam_for_lambda" {
         Effect: "Allow",
         Sid: ""
       }
-    ]
-  })
-}
-
-
-resource "aws_iam_role_policy" "hoan-test" {
-  name = "test_policy"
-  role = aws_iam_role.iam_for_lambda.id
-  policy = jsonencode({
-    Version = var.aws_iam_role_policy_version
-    Statement = [
-      {
-        Action = [
-          "ec2:Describe*",
-        ]
-        Effect   = "Allow"
-        Resource = "*"
-      },
     ]
   })
 }

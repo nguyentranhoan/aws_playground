@@ -26,8 +26,8 @@ module "glue" {
     source = "./glue/"
     depends_on = [module.athena]
 }
-#
-#module "lambda" {
-#    source = "./lambda/"
-#}
-#
+
+module "lambda" {
+    source = "./lambda/"
+}
+
