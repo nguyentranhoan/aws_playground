@@ -2,7 +2,7 @@ resource "aws_cloudwatch_event_rule" "copy_file_every_5_min" {
   name        = "copy_file_every_5_min"
   description = "copy file between buckets for every 5 mins"
 
-  schedule_expression = "rate(5 minutes)"
+  schedule_expression = var.schedule_expression
 }
 
 resource "aws_cloudwatch_event_target" "copy_file_between_buckets" {

@@ -1,7 +1,7 @@
 resource "aws_iam_policy" "s3_iam_policy" {
   name        = "s3_policy"
   policy      = jsonencode({
-    Version: "2012-10-17",
+    Version: var.aws_iam_policy_version,
     Statement: [
         {
             Effect: "Allow",
@@ -32,11 +32,11 @@ resource "aws_iam_role" "iam_for_lambda" {
 }
 
 
-resource "aws_iam_role_policy" "hona-test" {
+resource "aws_iam_role_policy" "hoan-test" {
   name = "test_policy"
   role = aws_iam_role.iam_for_lambda.id
   policy = jsonencode({
-    Version = "2012-10-17"
+    Version = var.aws_iam_role_policy_version
     Statement = [
       {
         Action = [

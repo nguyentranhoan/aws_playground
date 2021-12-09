@@ -1,7 +1,7 @@
 resource "aws_sfn_state_machine" "hoan-sfn_state_machine" {
   name     = "hoan-sfn_state_machine"
-  role_arn = "arn:aws:iam::639039451250:role/service-role/StepFunctions-hoan-test-state_machine-role-08e8009d"
-#  role_arn = aws_sns_topic_policy.default.arn
+  depends_on = [aws_iam_policy.sfn_iam_policy]
+  role_arn = aws_iam_role.hoan_sfn_role.arn  #"arn:aws:iam::639039451250:role/service-role/StepFunctions-hoan-test-state_machine-role-08e8009d"
 
   definition = jsonencode(
 {
@@ -13,12 +13,12 @@ resource "aws_sfn_state_machine" "hoan-sfn_state_machine" {
       "Resource": "arn:aws:states:::athena:startQueryExecution.sync",
       "Parameters": {
         "QueryExecutionContext": {
-          "Catalog": "AwsDataCatalog",
-          "Database": "euro2020"
+          "Catalog": var.catalog,
+          "Database": var.database
         },
-        "QueryString": "SELECT SUM(scorehome) AS TOTAL_HOME_SCORES, SUM(scoreaway) AS TOTAL_AWAY_SCORE FROM match_information",
+        "QueryString": var.query_compare_scores,
         "ResultConfiguration": {
-          "OutputLocation": "s3://hoan-terraform-destination/"
+          "OutputLocation": var.output_location
         },
         "WorkGroup": "primary"
       },

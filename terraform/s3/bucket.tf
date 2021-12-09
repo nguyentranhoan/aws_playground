@@ -13,6 +13,7 @@ resource "aws_s3_bucket_object" "hoan-upload-file-terraform" {
   bucket = var.hoan-terraform-source
   key    = var.key_file
   source = var.path_to_file
+  depends_on = [aws_s3_bucket.hoan-create_bucket_terraform]
 }
 #
 #

@@ -1,10 +1,10 @@
 locals {
-    lambda_zip_location= "output/lambda_function.zip"
+    lambda_zip_location= var.zip_lambda_fucntion_location
 }
 
 data "archive_file" "lambda_function" {
   type        = "zip"
-  source_file = "lambda/lambda_function.py"
+  source_file = var.lambda_function_location
   output_path = local.lambda_zip_location
 }
 

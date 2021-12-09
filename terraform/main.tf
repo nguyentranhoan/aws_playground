@@ -10,6 +10,7 @@ module "s3" {
 }
 
 module "athena" {
+    depends_on = [module.s3]
     source = "./athena/"
 }
 
@@ -21,6 +22,10 @@ module "sfn" {
     source = "./sfn/"
 }
 
+module "glue" {
+    source = "./glue/"
+    depends_on = [module.athena]
+}
 #
 #module "lambda" {
 #    source = "./lambda/"
