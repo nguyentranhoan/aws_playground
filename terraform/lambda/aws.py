@@ -122,14 +122,3 @@ class S3BucketFile:
         S3Bucket.s3_resource.meta.client(CopySource=copy_source,
                                          Bucket=bucket_destination_name,
                                          Key=file_name)
-
-
-# if __name__ == '__main__':
-#     bucket_source, _ = S3Bucket.create_bucket_using_session('hoan-test-source')
-#     bucket_destination, _ = S3Bucket.create_bucket_using_session('hoan-test-destination')
-#     # Upload file to source bucket(s)
-#     S3BucketFile.upload_a_file_using_bucket(bucket_source, 'static/hoan.txt')
-#     S3BucketFile.upload_a_file_using_bucket(bucket_source, 'static/athena.txt.txt')
-#     # copy file file from source bucket(s) to des bucket(s)
-#     S3BucketFile.copy_a_file_using_bucket(bucket_source, bucket_destination, 'static/hoan.txt')
-#     S3BucketFile.copy_a_file_using_bucket(bucket_source, bucket_destination, 'static/athena.txt.txt')

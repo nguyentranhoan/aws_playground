@@ -41,6 +41,7 @@ def create_policy(policy_name: str, policy_document: str, description=''):
         print("AN error occurred!")
 
 
+# json.dumps()
 get_query = """{
     "Version": "2012-10-17",
     "Statement": [

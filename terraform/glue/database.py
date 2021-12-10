@@ -7,14 +7,16 @@ def create_database(database_name: str):
     print(f"Creating database {database_name}...")
     client = boto3.client("glue")
     try:
-        client.create_database(
+        response = client.create_database(
             DatabaseInput={
                 'Name': database_name,
                 'Description': f'{database_name} statistic',
             }
         )
         print(f"Database {database_name} created successfully!")
-    except client.exceptions:
+        print(response)
+        return response
+    except Exception:
         print("An error occurred!")
 
 
@@ -23,7 +25,7 @@ def create_table(database_name: str, table_name: str):
     print(f"Creating table {table_name} for database {database_name}...")
     client = boto3.client("glue")
     try:
-        client.create_table(
+        response = client.create_table(
         DatabaseName=database_name,
         TableInput={
             'Name': table_name,
@@ -57,9 +59,12 @@ def create_table(database_name: str, table_name: str):
             },
         },
     )
+        print(response)
         print(f"Table {table_name} created successfully!")
+        return response
     except exceptions:
         print("An error occurred!")
 
 
 create_table("worldcup2022", "match_information")
+# create_database("nyc")

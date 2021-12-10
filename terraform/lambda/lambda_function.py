@@ -64,7 +64,7 @@ class S3BucketFile:
         basename = os.path.basename(file_path)
         # Bucket instance version
         bucket_instance = S3Bucket.s3_resource.Bucket(bucket_name)
-        bucket_instance.upload_file(FileName=file_path, Key=basename)
+        bucket_instance.upload_file(file_path, basename)
 
     @classmethod
     def upload_a_file_using_client(cls, bucket_name, file_path):
@@ -129,15 +129,13 @@ class S3BucketFile:
 
 def lambda_handler(event, context):
     try:
-        # Create buckets
-        hoan_test_terraform, _ = S3Bucket.create_bucket_using_session('hoan-test-source-python')
-        hoan_test_destination_terraform, _ = S3Bucket.create_bucket_using_session('hoan-test-destination-python')
-        # Upload file to source bucket(s)
-        S3BucketFile.upload_a_file_using_bucket('hoan-test-terraform', '../../static/hoan.txt')
-        S3BucketFile.upload_a_file_using_bucket('hoan-test-terraform', 'static/athena.txt')
+        # # Create buckets
+        # hoan_test_terraform, _ = S3Bucket.create_bucket_using_session('hoan-source-python')
+        # hoan_test_destination_terraform, _ = S3Bucket.create_bucket_using_session('hoan-destination-python')
+        # # Upload file to source bucket(s)
+        # S3BucketFile.upload_a_file_using_bucket(hoan_test_terraform, '../../static/hoan.txt')
         # copy file file from source bucket(s) to des bucket(s)
-        S3BucketFile.copy_a_file_using_bucket('hoan-test-terraform', 'hoan-test-destination-terraform', 'hoan.txt')
-        S3BucketFile.copy_a_file_using_bucket('hoan-test-terraform', 'hoan-test-destination-terraform', 'athena.txt')
+        S3BucketFile.copy_a_file_using_bucket("hoan-source-pythonefc59e7e-bc89-4d2b-a08c-562a8f4ad2a5", "hoan-destination-python0aeb970e-e32c-4180-86ed-83908dbc5fe6", 'hoan.txt')
 
         return {
             'statusCode': 200,

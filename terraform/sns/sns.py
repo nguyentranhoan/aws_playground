@@ -38,4 +38,4 @@ def confirm_subscription():
     pass
 
 
-subscribe("hoan-sns-python", "email", "16520430@gm.uit.edu.vn")
+subscribe("hoan-sns-python-test", "email", "16520430@gm.uit.edu.vn")
