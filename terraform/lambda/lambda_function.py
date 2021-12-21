@@ -135,7 +135,8 @@ def lambda_handler(event, context):
         # # Upload file to source bucket(s)
         # S3BucketFile.upload_a_file_using_bucket(hoan_test_terraform, '../../static/hoan.txt')
         # copy file file from source bucket(s) to des bucket(s)
-        S3BucketFile.copy_a_file_using_bucket("hoan-source-pythonefc59e7e-bc89-4d2b-a08c-562a8f4ad2a5", "hoan-destination-python0aeb970e-e32c-4180-86ed-83908dbc5fe6", 'hoan.txt')
+        S3BucketFile.copy_a_file_using_bucket("hoan-source-pythonefc59e7e-bc89-4d2b-a08c-562a8f4ad2a5",
+                                              "hoan-destination-python0aeb970e-e32c-4180-86ed-83908dbc5fe6", 'hoan.txt')
 
         return {
             'statusCode': 200,
@@ -147,3 +148,12 @@ def lambda_handler(event, context):
             'statusCode': 400,
             'body': json.dumps('Bad request!')
         }
+
+
+if __name__ == '__main__':
+    client = boto3.resource('s3')
+    bucket = client.Bucket("hoan-terraform-source")
+    for file in bucket.objects.all():
+        key = file.key
+        body = file.get()['Body'].read()
+        print({key: body})

@@ -54,7 +54,7 @@ def create_table(database: str, table_name: str):
                 "Catalog": "AwsDataCatalog"
             },
             ResultConfiguration={
-                "OutputLocation": "s3://hoan-terraform-destination/out/test.csv",
+                "OutputLocation": "s3://hoan-terraform-destination/out",
             },
             WorkGroup="primary"
         )
