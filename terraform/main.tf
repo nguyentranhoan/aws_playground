@@ -9,25 +9,25 @@ module "s3" {
     source = "./s3/"
 }
 
-module "athena" {
-    depends_on = [module.s3]
-    source = "./athena/"
-}
+# module "athena" {
+#     depends_on = [module.s3]
+#     source = "./athena/"
+# }
 
-module "sns" {
-    source = "./sns/"
-}
+# module "sns" {
+#     source = "./sns/"
+# }
 
-module "sfn" {
-    source = "./sfn/"
-}
+# module "sfn" {
+#     source = "./sfn/"
+# }
 
-module "glue" {
-    source = "./glue/"
-    depends_on = [module.athena]
-}
+# module "glue" {
+#     source = "./glue/"
+#     depends_on = [module.athena]
+# }
 
-module "lambda" {
-    source = "./lambda/"
-}
+# module "lambda" {
+#     source = "./lambda/"
+# }
 
