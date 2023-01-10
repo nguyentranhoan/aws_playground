@@ -13,7 +13,7 @@ jobs:
       - run: npm install -g bats
       - run: bats -v
       # run terraform
-      - name: deploy terraform:
+      - name: deploy terraform
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
