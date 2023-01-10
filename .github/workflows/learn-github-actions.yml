@@ -2,12 +2,24 @@ name: learn-github-actions
 run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push]
 jobs:
-  check-bats-version:
+  hoan-testing-github-actions:
     runs-on: ubuntu-latest
     steps:
+      - name: check-bats-version
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
       - run: npm install -g bats
       - run: bats -v
+      # run terraform
+      - name: deploy terraform:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - uses: hashicorp/setup-terraform@v1
+      - run:
+        cd terraform
+        terraform init
+        terraform plan
+        terraform apply -auto-approve
