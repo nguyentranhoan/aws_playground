@@ -16,6 +16,10 @@ provider "aws" {
 #     source = "./sns/"
 # }
 
+module "ecr" {
+    source = "./ecr/"
+}
+
 # module "sfn" {
 #     source = "./sfn/"
 # }

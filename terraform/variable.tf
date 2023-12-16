@@ -5,5 +5,5 @@ variable "aws_secret_key" {
     default = ""
 }
 variable "region" {
-    default = "ap-southeast-1"
+    default = "us-east-1" #"ap-southeast-1"
 }

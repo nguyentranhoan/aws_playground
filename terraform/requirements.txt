@@ -1,0 +1,6 @@
+boto3
+pandas
+python-decouple
+google-api-python-client
+oauth2client
+python-dotenv
